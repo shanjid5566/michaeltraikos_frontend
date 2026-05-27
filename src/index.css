@@ -50,6 +50,10 @@ button, a, [role="button"] {
 .hero-line { background: #000; }
 .dark-theme .hero-line { background: #fff; }
 
+/* Client portfolio cards */
+.client-card { background-color: #181818; }
+.dark-theme .client-card { background-color: #1a1a1a; }
+
 /* Dark theme overrides — toggled via .dark-theme class on wrapper */
 .dark-theme {
   --text: rgba(255, 255, 255, 0.55);

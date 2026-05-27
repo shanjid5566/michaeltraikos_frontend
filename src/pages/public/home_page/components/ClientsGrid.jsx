@@ -93,7 +93,7 @@ function ClientCard({ client, index, onEnter, onLeave }) {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       aria-label={client.sub ? `${client.name} ${client.sub}` : client.name}
-      className="relative overflow-hidden cursor-pointer select-none"
+      className="relative overflow-hidden client-card cursor-pointer select-none"
       style={{ aspectRatio: '5 / 6', opacity: index === 0 ? 1 : 0, zIndex: 48 }}
     >
       {/* Image / color reveal layer */}
@@ -132,28 +132,27 @@ export default function ClientsGrid() {
     if (!cards.length) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(cards[0], { opacity: 1, y: 0 });
+      // Initial states
+      gsap.set(cards[0], { opacity: 1 });
+      gsap.set(cards.slice(1), { opacity: 0 });
 
       if (prefersReduced) {
-        gsap.set(cards.slice(1), { opacity: 1, y: 0 });
-      } else {
-        gsap.fromTo(
-          cards.slice(1),
-          { y: 70, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.85,
-            ease: 'power2.out',
-            stagger: 0.12,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: 'top 75%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
+        gsap.set(cards.slice(1), { opacity: 1 });
+        return;
       }
+
+      // All cards 1–5 reveal together when dark theme kicks in (~150px scroll)
+      gsap.to(cards.slice(1), {
+        opacity: 1,
+        duration: 0.55,
+        ease: 'power2.out',
+        stagger: 0.04,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 65%',
+          toggleActions: 'play none none none',
+        },
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -180,12 +179,12 @@ export default function ClientsGrid() {
       <section
         ref={sectionRef}
         aria-label="Client portfolio"
-        className="relative bg-black pt-0.5"
+        className="relative bg-black pt-0.5 pb-[100px]"
       >
         <div
           ref={gridRef}
           className="grid grid-cols-3 gap-px mx-auto"
-          style={{ maxWidth: '900px' }}
+          style={{ maxWidth: '900px', marginTop: '-100px' }}
         >
           {CLIENTS.map((client, i) => (
             <ClientCard
