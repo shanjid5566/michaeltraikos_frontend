@@ -1,5 +1,6 @@
 import SEO from '../../../components/SEO';
 import HeroBanner from './components/HeroBanner';
+import ClientsGrid from './components/ClientsGrid';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
 
       <main id="main-content" tabIndex={-1} className="flex-1">
         <HeroBanner />
+        <ClientsGrid />
       </main>
     </>
   );
