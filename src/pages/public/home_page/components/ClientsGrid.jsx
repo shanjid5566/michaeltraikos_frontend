@@ -91,7 +91,7 @@ function ClientCard({ client, index, onEnter, onLeave }) {
       onMouseLeave={handleLeave}
       aria-label={client.sub ? `${client.name} ${client.sub}` : client.name}
       className={`relative overflow-hidden client-card cursor-pointer select-none${index > 0 ? ' client-card-reveal' : ''}`}
-      style={{ aspectRatio: '5 / 6', zIndex: 48 }}
+      style={{ aspectRatio: '8 / 8', zIndex: 48 }}
     >
       {/* Image / color reveal layer */}
       <div
@@ -144,8 +144,8 @@ export default function ClientsGrid() {
         className="relative clients-section pt-0.5 pb-[100px]"
       >
         <div
-          className="grid grid-cols-3 gap-px mx-auto"
-          style={{ maxWidth: '900px', marginTop: '-100px' }}
+          className="grid grid-cols-3 gap-8 mx-auto"
+          style={{ width: '75%', marginTop: '-100px' }}
         >
           {CLIENTS.map((client, i) => (
             <ClientCard
