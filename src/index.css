@@ -64,6 +64,16 @@ button, a, [role="button"] {
   transition: background-color 1.4s ease;
 }
 
+/* Cards 1–5: hidden by default, reveal with section bg (delay matches bg fade) */
+.client-card-reveal {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.dark-theme .client-card-reveal {
+  opacity: 1;
+  transition: opacity 0.6s ease 0.8s;
+}
+
 /* Dark theme overrides — toggled via .dark-theme class on wrapper */
 .dark-theme {
   --text: rgba(255, 255, 255, 0.55);

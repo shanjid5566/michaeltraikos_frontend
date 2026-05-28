@@ -1,8 +1,5 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const CLIENTS = [
   {
@@ -93,8 +90,8 @@ function ClientCard({ client, index, onEnter, onLeave }) {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       aria-label={client.sub ? `${client.name} ${client.sub}` : client.name}
-      className="relative overflow-hidden client-card cursor-pointer select-none"
-      style={{ aspectRatio: '5 / 6', opacity: index === 0 ? 1 : 0, zIndex: 48 }}
+      className={`relative overflow-hidden client-card cursor-pointer select-none${index > 0 ? ' client-card-reveal' : ''}`}
+      style={{ aspectRatio: '5 / 6', zIndex: 48 }}
     >
       {/* Image / color reveal layer */}
       <div
@@ -123,40 +120,6 @@ function ClientCard({ client, index, onEnter, onLeave }) {
 }
 
 export default function ClientsGrid() {
-  const sectionRef = useRef(null);
-  const gridRef    = useRef(null);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const cards = gridRef.current ? Array.from(gridRef.current.children) : [];
-    if (!cards.length) return;
-
-    const ctx = gsap.context(() => {
-      // Initial states
-      gsap.set(cards[0], { opacity: 1 });
-      gsap.set(cards.slice(1), { opacity: 0 });
-
-      if (prefersReduced) {
-        gsap.set(cards.slice(1), { opacity: 1 });
-        return;
-      }
-
-      // All cards 1–5 reveal when section is dark (~400px scroll, matches dark-theme threshold)
-      gsap.to(cards.slice(1), {
-        opacity: 1,
-        duration: 0.55,
-        ease: 'power2.out',
-        stagger: 0.04,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 42%',
-          toggleActions: 'play none none reverse',
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleEnter = useCallback((color) => {
     gsap.to(document.getElementById('page-overlay'), {
@@ -177,12 +140,10 @@ export default function ClientsGrid() {
   return (
     <>
       <section
-        ref={sectionRef}
         aria-label="Client portfolio"
         className="relative clients-section pt-0.5 pb-[100px]"
       >
         <div
-          ref={gridRef}
           className="grid grid-cols-3 gap-px mx-auto"
           style={{ maxWidth: '900px', marginTop: '-100px' }}
         >
