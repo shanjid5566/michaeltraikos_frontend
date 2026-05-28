@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import { useScrolled } from '../hooks/useScrolled';
 
 export default function RootLayout() {
-  const scrolled = useScrolled(15);
+  const scrolled = useScrolled(50);
 
   return (
     <>

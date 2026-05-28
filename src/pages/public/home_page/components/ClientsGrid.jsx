@@ -141,7 +141,7 @@ export default function ClientsGrid() {
         return;
       }
 
-      // All cards 1–5 reveal together when dark theme kicks in (~150px scroll)
+      // All cards 1–5 reveal when section is dark (~400px scroll, matches dark-theme threshold)
       gsap.to(cards.slice(1), {
         opacity: 1,
         duration: 0.55,
@@ -149,8 +149,8 @@ export default function ClientsGrid() {
         stagger: 0.04,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 65%',
-          toggleActions: 'play none none none',
+          start: 'top 42%',
+          toggleActions: 'play none none reverse',
         },
       });
     }, sectionRef);
@@ -179,7 +179,7 @@ export default function ClientsGrid() {
       <section
         ref={sectionRef}
         aria-label="Client portfolio"
-        className="relative bg-black pt-0.5 pb-[100px]"
+        className="relative clients-section pt-0.5 pb-[100px]"
       >
         <div
           ref={gridRef}

@@ -54,6 +54,16 @@ button, a, [role="button"] {
 .client-card { background-color: #181818; }
 .dark-theme .client-card { background-color: #1a1a1a; }
 
+/* ClientsGrid section background — slow fade to black on dark-theme, fast reset on light */
+.clients-section {
+  background-color: #ffffff;
+  transition: background-color 0.25s ease;
+}
+.dark-theme .clients-section {
+  background-color: #000000;
+  transition: background-color 1.4s ease;
+}
+
 /* Dark theme overrides — toggled via .dark-theme class on wrapper */
 .dark-theme {
   --text: rgba(255, 255, 255, 0.55);
