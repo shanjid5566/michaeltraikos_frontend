@@ -1,43 +1,49 @@
 import { useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
+import motivImg  from '@/assets/grid_image/motiv.webp';
+import acImg     from '@/assets/grid_image/ac.webp';
+import nesteaImg from '@/assets/grid_image/nestea.webp';
+import espnImg   from '@/assets/grid_image/espn.webp';
+import lafcImg   from '@/assets/grid_image/lafc.webp';
+import foxImg    from '@/assets/grid_image/fox.webp';
 
 const CLIENTS = [
   {
     id: 0,
     name: 'MOTIV',
-    pageColor: '#a09080',
-    imgStyle: { background: 'linear-gradient(160deg, #6b5040 0%, #a08060 100%)' },
+    pageColor: '#2B2E2E',
+    imgStyle: { backgroundImage: `url(${motivImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 1,
     name: 'AC Hotels',
     sub: 'Marriott',
-    pageColor: '#0a2e52',
-    imgStyle: { background: 'linear-gradient(160deg, #0a1e3a 0%, #1a5090 100%)' },
+    pageColor: '#BFBDB2',
+    imgStyle: { backgroundImage: `url(${acImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 2,
     name: 'Nestea',
-    pageColor: '#0096c7',
-    imgStyle: { background: 'linear-gradient(160deg, #004e64 0%, #00b4d8 100%)' },
+    pageColor: '#069EDA',
+    imgStyle: { backgroundImage: `url(${nesteaImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 3,
     name: 'ESPN',
-    pageColor: '#cc0000',
-    imgStyle: { background: 'linear-gradient(160deg, #7a0000 0%, #cc0000 100%)' },
+    pageColor: '#941608',
+    imgStyle: { backgroundImage: `url(${espnImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 4,
     name: 'LA Football Club',
-    pageColor: '#c39a2a',
-    imgStyle: { background: 'linear-gradient(160deg, #1a1000 0%, #c39a2a 100%)' },
+    pageColor: '#000000',
+    imgStyle: { backgroundImage: `url(${lafcImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 5,
     name: 'FOX',
-    pageColor: '#b71c1c',
-    imgStyle: { background: 'linear-gradient(160deg, #6a0000 0%, #e53935 100%)' },
+    pageColor: '#E6E147',
+    imgStyle: { backgroundImage: `url(${foxImg})`, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
 ];
 
