@@ -31,10 +31,10 @@ export default function HeroBanner() {
       <h1
         id="hero-heading"
         ref={textRef}
-        className="hero-text uppercase transition-colors duration-200"
+        className="hero-text uppercase transition-colors duration-200 max-w-6xl"
       >
-        Making Cents of Real Estate<br />
-        and Sense of Your Finance.
+        Making Cents Real Estate and Sense of Your<br />
+        Finance.
       </h1>
 
       {/* Animated vertical scroll indicator */}

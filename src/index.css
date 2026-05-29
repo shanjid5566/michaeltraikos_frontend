@@ -43,7 +43,7 @@ button, a, [role="button"] {
 }
 @media (min-width: 768px)  { .hero-text { font-size: 1rem; } }
 @media (min-width: 1024px) { .hero-text { font-size: 2.5rem;   } }
-@media (min-width: 1280px) { .hero-text { font-size: 3.5rem;   } }
+@media (min-width: 1280px) { .hero-text { font-size: 3rem;   } }
 .dark-theme .hero-text { color: #fff; }
 
 /* Animated scroll indicator line */
