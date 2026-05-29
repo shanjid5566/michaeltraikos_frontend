@@ -58,17 +58,30 @@ function ClientCard({ client, index, onEnter, onLeave }) {
   const startLoop = useCallback(() => {
     if (loopRef.current) loopRef.current.kill();
 
+    const chars = textRef.current
+      ? Array.from(textRef.current.querySelectorAll('.char'))
+      : [];
+
     const tl = gsap.timeline({ repeat: -1 });
-    tl.to(textRef.current, { y: -60, opacity: 0, duration: 0.5, ease: 'power2.in' })
-      .to(imgRef.current, { opacity: 1, duration: 0.4, ease: 'power1.out' }, '<0.15')
-      .to({}, { duration: 1.8 })
-      .to(imgRef.current, { opacity: 0, duration: 0.4, ease: 'power1.in' })
-      .fromTo(
-        textRef.current,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' },
-        '<0.15'
-      )
+    // Typewriter erase: chars disappear right → left
+    tl.to(chars, {
+        opacity: 0,
+        duration: 0.03,
+        stagger: { each: 0.04, from: 'end' },
+        ease: 'none',
+      })
+      // Image fades in after text erased
+      .to(imgRef.current, { opacity: 1, duration: 0.4, ease: 'power1.out' }, '<0.1')
+      .to({}, { duration: 1 })
+      // Typewriter type: chars appear left → right WHILE image is still showing
+      .to(chars, {
+        opacity: 1,
+        duration: 0.03,
+        stagger: { each: 0.04, from: 'start' },
+        ease: 'none',
+      })
+      // Image fades out AFTER text is fully typed back
+      .to(imgRef.current, { opacity: 0, duration: 0.5, ease: 'power1.in' })
       .to({}, { duration: 0.5 });
 
     loopRef.current = tl;
@@ -77,9 +90,10 @@ function ClientCard({ client, index, onEnter, onLeave }) {
   const stopLoop = useCallback(() => {
     if (loopRef.current) { loopRef.current.kill(); loopRef.current = null; }
     if (!textRef.current || !imgRef.current) return;
-    gsap.killTweensOf([textRef.current, imgRef.current]);
+    const chars = Array.from(textRef.current.querySelectorAll('.char'));
+    gsap.killTweensOf([...chars, imgRef.current]);
     gsap.to(imgRef.current, { opacity: 0, duration: 0.3 });
-    gsap.to(textRef.current, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' });
+    gsap.to(chars, { opacity: 1, duration: 0.15, stagger: { each: 0.03, from: 'start' } });
   }, []);
 
   const handleEnter = useCallback(() => {
@@ -114,12 +128,16 @@ function ClientCard({ client, index, onEnter, onLeave }) {
         ref={textRef}
         className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-8"
       >
-        <span className="text-white font-light tracking-[0.3em] uppercase text-center text-xs sm:text-sm md:text-base leading-relaxed">
-          {client.name}
+        <span className="text-white font-light tracking-[0.3em] uppercase text-center text-xs sm:text-sm md:text-base leading-relaxed flex flex-wrap justify-center">
+          {client.name.split('').map((char, i) => (
+            <span key={i} className="char inline-block">{char === ' ' ? '\u00A0' : char}</span>
+          ))}
         </span>
         {client.sub && (
-          <span className="text-white/40 text-[0.65rem] tracking-[0.25em] uppercase">
-            {client.sub}
+          <span className="text-white/40 text-[0.65rem] tracking-[0.25em] uppercase flex flex-wrap justify-center">
+            {client.sub.split('').map((char, i) => (
+              <span key={i} className="char inline-block">{char === ' ' ? '\u00A0' : char}</span>
+            ))}
           </span>
         )}
       </div>
