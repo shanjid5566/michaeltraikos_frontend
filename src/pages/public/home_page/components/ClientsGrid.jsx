@@ -170,22 +170,8 @@ export default function ClientsGrid() {
         className="relative clients-section pt-0.5 pb-[100px]"
       >
         <div
-          className="grid grid-cols-2 gap-4 mx-auto clients-grid block md:hidden"
-          style={{ width: '90%', marginTop: '-100px' }}
-        >
-          {CLIENTS.map((client, i) => (
-            <ClientCard
-              key={client.id}
-              client={client}
-              index={i}
-              onEnter={handleEnter}
-              onLeave={handleLeave}
-            />
-          ))}
-        </div>
-        <div
-          className="grid grid-cols-3 gap-8 mx-auto clients-grid hidden md:block"
-          style={{ width: '75%', marginTop: '-100px' }}
+          className="grid grid-cols-2 md:grid-cols-3 gap-4 w-[90%] md:w-[75%] md:gap-8 mx-auto clients-grid"
+          style={{marginTop: '-100px' }}
         >
           {CLIENTS.map((client, i) => (
             <ClientCard
