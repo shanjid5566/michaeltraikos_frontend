@@ -48,9 +48,10 @@ const CLIENTS = [
 ];
 
 function ClientCard({ client, index, onEnter, onLeave }) {
-  const textRef = useRef(null);
-  const imgRef  = useRef(null);
-  const loopRef = useRef(null);
+  const textRef   = useRef(null);
+  const imgRef     = useRef(null);
+  const loopRef    = useRef(null);
+  const articleRef = useRef(null);
 
   useEffect(() => () => { if (loopRef.current) loopRef.current.kill(); }, []);
 
@@ -93,11 +94,12 @@ function ClientCard({ client, index, onEnter, onLeave }) {
 
   return (
     <article
+      ref={articleRef}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       aria-label={client.sub ? `${client.name} ${client.sub}` : client.name}
       className={`relative overflow-hidden client-card cursor-pointer select-none${index > 0 ? ' client-card-reveal' : ''}`}
-      style={{ aspectRatio: '8 / 8', zIndex: 48 }}
+      style={{ aspectRatio: '8 / 8', zIndex: 51 }}
     >
       {/* Image / color reveal layer */}
       <div
@@ -150,7 +152,7 @@ export default function ClientsGrid() {
         className="relative clients-section pt-0.5 pb-[100px]"
       >
         <div
-          className="grid grid-cols-3 gap-8 mx-auto"
+          className="grid grid-cols-3 gap-8 mx-auto clients-grid"
           style={{ width: '75%', marginTop: '-100px' }}
         >
           {CLIENTS.map((client, i) => (
