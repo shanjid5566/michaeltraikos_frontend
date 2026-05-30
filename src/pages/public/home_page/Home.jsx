@@ -2,12 +2,14 @@ import SEO from '../../../components/SEO';
 import HeroBanner from './components/HeroBanner';
 import ClientsGrid from './components/ClientsGrid';
 import LendersCarousel from './components/LendersCarousel';
+import AboutSection from './components/AboutSection';
+import ReviewsSection from './components/ReviewsSection';
 
 export default function Home() {
   return (
     <>
       <SEO
-        title="Home"
+        title="Traikos Finance | Real Estate Insight to Financial Foresight"
         description="Making cents of real estate and sense of your finance."
         canonical="https://example.com/"
       />
@@ -16,6 +18,8 @@ export default function Home() {
         <HeroBanner />
         <ClientsGrid />
         <LendersCarousel />
+        <AboutSection />
+        <ReviewsSection />
       </main>
     </>
   );
